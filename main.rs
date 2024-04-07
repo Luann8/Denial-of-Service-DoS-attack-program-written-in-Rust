@@ -1,6 +1,7 @@
 use std::net::{TcpStream, SocketAddr};
 use std::thread;
 use std::sync::{Arc, Mutex};
+use std::time::Duration;
 
 fn main() {
     let target_ip = "TARGET_IP_ADDRESS";
@@ -48,6 +49,9 @@ fn main() {
                         println!("Connection error: {:?}", e);
                     }
                 }
+
+                // Sleep for a short duration before attempting another connection
+                thread::sleep(Duration::from_secs(1));
             }
         });
         handles.push(handle);
